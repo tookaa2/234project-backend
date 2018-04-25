@@ -19,7 +19,28 @@ public class SaleTransaction {
     Long id;
     String transactionId;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public SaleOrder getOrder() {
+        return order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
     @ManyToOne
+
     @JoinColumn(name = "order_id")
     SaleOrder order;
     @OneToOne (fetch = FetchType.EAGER)
