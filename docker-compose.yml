@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  frontend:
+    image: dto80/project234-frontend
+    ports:
+      - "9084:8080"
+    volumes:
+     - type: bind
+       source: ./settings
+       target: /usr/share/nginx/html/assets
+  backend:
+    image: tookaa2/se234-project-backend
+    ports:
+      - "9083:80"
+
