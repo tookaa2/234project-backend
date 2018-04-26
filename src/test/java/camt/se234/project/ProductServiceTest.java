@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.Mockito.mock;
@@ -62,6 +63,13 @@ public class ProductServiceTest {
 
     @Test
     public void testGetUnavailableProductSize(){
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(114578L,"pepsi578","pepsi","Kind of drink","./img/114578.png",20.50));
+        products.add(new Product(114780L,"chickenKG","Chicken meat","Fresh chiken meat,no skin","./img/114780.png",0.00));
+        products.add(new Product(114798L,"bakingP98","Lotus Baking Powder 98gram","Kind of drink","./img/114798.png",20.00));
+        products.add(new Product(114881L,"pencil2B","2B pencil stedser brand","stationary for writing","./img/114881.png",-2.00));
 
+        when(productDao.getProducts()).thenReturn(products);
+        assertThat(productService.getUnavailableProductSize(),is(2));
     }
 }
