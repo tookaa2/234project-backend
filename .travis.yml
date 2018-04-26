@@ -12,7 +12,7 @@ before_install:
 install:
 - mvn install -Dmaven.javadoc.skip=true -B -V
 - ls -l
-- docker build --build-arg JAR_FILE=/target/backend.jar -t tookaa2/se234-project-backend  .
+- docker build --build-arg JAR_FILE=/target/app.jar -t tookaa2/se234-project-backend  .
 - docker push tookaa2/se234-project-backend
 - docker pull tookaa2/se234-project-backend
 script:
