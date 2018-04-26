@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,15 +40,22 @@ public class SalesOrderServiceTest {
         SaleTransaction transaction1= new SaleTransaction(0001L,"7DR94E6",sale1,pepsi,5);
         SaleTransaction transaction2= new SaleTransaction(0002L,"8E9S5F4",sale1,coke,1);
         SaleTransaction transaction3= new SaleTransaction(0003L,"7E88RQ9",sale1,carrot,3);
-        ///Adding all the transactions into sale1
-        sale1.getTransactions().add(transaction1);
-        sale1.getTransactions().add(transaction2);
-        sale1.getTransactions().add(transaction3);
+        ///Adding all the transactions into temporary transaction variable
+        List<SaleTransaction> transactionsList = new ArrayList<>();
+        transactionsList.add(transaction1);
+        transactionsList.add(transaction2);
+        transactionsList.add(transaction3);
 
+        /// set the sale's transactionList
+        sale1.setTransactions(transactionsList);
+
+        /// add sale 1 to the orders
         orders.add(sale1);
 
         when(orderDao.getOrders()).thenReturn(orders);
-        assertThat(salesOrderService.getSaleOrders(),is(orders));
+        assertThat(salesOrderService.getSaleOrders(),hasItem(
+                (new SaleOrder(1234L,"E12R78E",transactionsList))
+        ));
     }
 
     @Test
