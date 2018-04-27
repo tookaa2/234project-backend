@@ -1,6 +1,4 @@
-language: node_js
-node_js:
-- 8.4.0
+language: java
 sudo: required
 before_install:
 - sudo rm /usr/local/bin/docker-compose
