@@ -13,9 +13,7 @@ install:
 - ls -l
 - docker build --build-arg JAR_FILE=/target/app.jar -t tookaa2/se234-project-backend  .
 - docker push tookaa2/se234-project-backend
-- docker pull tookaa2/se234-project-backend
-script:
-- docker-compose -H "$DOCKER_HOST" up -d
+- docker pull dto80/project234-frontend:latest
 cache:
   directories:
   - "$HOME/.m2"
